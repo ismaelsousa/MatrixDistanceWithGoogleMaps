@@ -9,4 +9,4 @@ Quixeré-Limoeiro+do+norte=20.0
 
 Quixeré-Russas=32.9
 
-\nLimoeiro+do+norte-Russas=41.4
+Limoeiro+do+norte-Russas=41.4

@@ -7,11 +7,62 @@ async function main(){
    * Criando lista das cidades
    * creating list of cities
    */
-
+   
   var cidades = [
-    'Quixeré',
-    'Limoeiro+do+norte',
-    'Russas'      
+    'Barroquinha',
+    'Chaval',
+    'Jijoca+de+jericoacoara',
+    'Acaraú',     
+    'Itarema',    
+    'Marco',    
+    'Morrinhos',    
+    'Tururu',    
+    'Massapê',    
+    'Tianguá',
+
+    'São+Benedito',    
+    'Sobral',    
+    'Forquilha',    
+    'Umirim',    
+    'Caucaia',    
+    'São+Gonçalo+do+Amarante',    
+    'Paracuru',    
+    'Maranguape',    
+    'Maracanaú',    
+    'Pacatuba',
+
+    'Fortaleza',    
+    'Aquiraz',    
+    'Eusébio',    
+    'Guaiúba',    
+    'Pacoti',    
+    'Reriutaba',    
+    'Varjota',    
+    'Canindé',    
+    'Horizonte',    
+    'Baturité',    
+
+    'Itatira',    
+    'Crateús',    
+    'Piquet+Carneiro',    
+    'Saboeiro',    
+    'Iguatu',    
+    'Icó',    
+    'Juazeiro+do+Norte',    
+    'Limoeiro+do+Norte',    
+    'Tabuleiro+do+Norte',    
+    'Morada+Nova',  
+
+    'Quixadá',    
+    'Ibaretama',    
+    'Aracoiba',    
+    'Jaguaruana',    
+    'Icapuí',    
+    'Aracati',    
+    'Chorozinho',    
+    'Pacajus',    
+    'Pindoretama',    
+    
   ]
   /**
    * Criando matriz com as posições das cidades
@@ -26,6 +77,7 @@ async function main(){
    * Buscando da API do Google Cada distância entre duas cidades
    * Searching the Google API Every Distance Between Two Cities
    */
+  var stream = fs.createWriteStream('mapCitys.txt', {flags: 'a'});  
   for (var i = 0; i < matrix.length; i++) {
     for (var j = 0; j < matrix.length; j++) {
       if(i===j){
@@ -62,6 +114,8 @@ async function main(){
         const [kms, sigla] = data.rows[0].elements[0].distance.text.split(' ')
         
         matrix[i][j] = kms
+        console.log(`${cidades[i]}-${cidades[j]}-${matrix[i][j]}\n`)
+        await  stream.write(`${cidades[i]}-${cidades[j]}-${matrix[i][j]}\n`) 
       }
     }
   }
@@ -75,14 +129,14 @@ async function main(){
    * In the model cityA to cityB = Distance
    * Russian-Quixeré = 32.7
    */
-  var stream = fs.createWriteStream('mapCitys.txt', {flags: 'a'});  
-  for (let i = 0; i < matrix.length; i++) {   
-    for (let j = 0; j < matrix[i].length; j++) {   
-      if(i===j) continue
-      if(i>j) continue      
-      await  stream.write(`${cidades[i]}-${cidades[j]}=${matrix[i][j]}\n`)      
-    }
-  }   
+  // var stream = fs.createWriteStream('mapCitys.txt', {flags: 'a'});  
+  // for (let i = 0; i < matrix.length; i++) {   
+  //   for (let j = 0; j < matrix[i].length; j++) {   
+  //     if(i===j) continue
+  //     if(i>j) continue      
+  //     await  stream.write(`${cidades[i]}-${cidades[j]}-${matrix[i][j]}\n`)      
+  //   }
+  // }   
   console.table(matrix);
 
 }
